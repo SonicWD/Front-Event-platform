@@ -13,7 +13,6 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/create-account" element={<CreateAccount />} />{" "}
-          {/* Agregamos la ruta para CreateAccount */}
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />
         </Routes>
