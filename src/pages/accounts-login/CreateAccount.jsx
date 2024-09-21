@@ -48,6 +48,7 @@ const CreateAccount = () => {
 
     if (!isValid) {
       console.log("Form is not valid");
+      console.log("data", name, email, password, role); 
       return;
     }
 

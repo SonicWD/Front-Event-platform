@@ -1,7 +1,7 @@
 // src/config/config.js
 //Se utliza para cambiar de entorno de desarrollo 
 // eslint-disable-next-line react-refresh/only-export-components
-const ENV = "development"; // Cambia a "production" o a "development"
+const ENV = "production"; // Cambia a "production" o a "development"
 
 const config = {
   development: {
