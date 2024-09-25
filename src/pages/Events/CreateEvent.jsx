@@ -155,7 +155,7 @@ const CreateEvent = () => {
                     </div>
                     <button 
                         type="submit" 
-                        className={`w-full py-2 px-4 rounded ${darkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}
+                        className={`w-full mb-10 py-2 px-4 rounded ${darkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}
                     >
                         Create Event
                     </button>
