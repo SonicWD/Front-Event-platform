@@ -5,7 +5,7 @@ import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import '../../index.css';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from "../config/config"; // Importa la URL de la API
+import API_URL from "../../config/config"; // Importa la URL de la API
 
 const EditAccount = ({ initialName = '', initialEmail = '', initialPassword = '', onSave }) => {
   const [name, setName] = useState(initialName);

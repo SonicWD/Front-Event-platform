@@ -1,9 +1,14 @@
 // eslint-disable-next-line no-unused-vars
-import React, { createContext, useState, useEffect } from 'react'; // Importa React y algunos hooks
+import React, { createContext, useState, useEffect, useContext } from 'react'; // Importa React y algunos hooks
 import PropTypes from 'prop-types'; // Importa PropTypes para la validación de propiedades
 
 // Crea un contexto para la autenticación
 export const AuthContext = createContext();
+
+// Hook personalizado para usar el contexto de autenticación
+const useAuth = () => {
+    return useContext(AuthContext);
+};
 
 // Componente proveedor de autenticación
 export const AuthProvider = ({ children }) => {
@@ -34,3 +39,6 @@ export const AuthProvider = ({ children }) => {
 AuthProvider.propTypes = {
     children: PropTypes.node.isRequired, // children es un nodo de React y es requerido
 };
+
+// Exportar el hook useAuth por defecto
+export default useAuth;

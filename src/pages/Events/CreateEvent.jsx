@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getUserInfo } from '../../utils/fetchUserInfo';
 import '../../index.css';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from "../../config/config"; 
+import API_URL  from "../../config/config"; 
 //Poner limites de formulario
 const CreateEvent = () => {
     const [title, setTitle] = useState('');

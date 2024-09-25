@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import '../../index.css';
-import { API_URL } from "../../utils/fetchUserInfo"; // Importa la URL de la API
+import API_URL from "../../config/config"; // Importa la URL de la API
 
 const EventList = ({ onSelectEvent }) => {
     const [events, setEvents] = useState([]);

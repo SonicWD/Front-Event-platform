@@ -1,5 +1,4 @@
-import { API_URL } from "../config/config"; // Importa la URL de la API desde el archivo de configuración
-
+import API_URL from "../config/config"; // Importa la URL de la API desde el archivo de configuración
 // Función asíncrona para obtener la información del usuario
 export const getUserInfo = async (token) => {
     try {

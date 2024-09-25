@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { getUserInfo } from "../../utils/fetchUserInfo"; 
-import { API_URL } from "../../config/config"; 
+import API_URL from "../../config/config"; 
 import { Link } from "react-router-dom";
 
 const EventDetail = ({ event, onClose }) => {

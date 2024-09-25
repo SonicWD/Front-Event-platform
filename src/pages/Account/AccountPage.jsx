@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import MyAccount from './My-Account';
 import EditAccount from './EditAccount';
-import { getUserInfo } from '../Main/api'; // Importa la función de la API aquí
+import { getUserInfo } from '../../utils/fetchUserInfo'; // Importa la función de la API aquí
 
 const AccountPage = () => {
   const [userInfo, setUserInfo] = useState(null); // Inicializa userInfo como null para indicar estado de carga
