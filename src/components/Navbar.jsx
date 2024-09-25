@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X, Sun, Moon, LogOut, LogIn } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from '../context/useTheme';
 import { getUserInfo } from '../utils/fetchUserInfo';
 
 const Navbar = () => {

@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
 
-const ThemeContext = createContext();
+export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(() => {
@@ -25,11 +26,14 @@ export const ThemeProvider = ({ children }) => {
     });
   };
 
+  // Add PropTypes validation
+ThemeProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+  };
+
   return (
     <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
       {children}
     </ThemeContext.Provider>
   );
 };
- 
-export const useTheme = () => useContext(ThemeContext);

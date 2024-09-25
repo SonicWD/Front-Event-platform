@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../context/useTheme';
 import { Eye, EyeOff, Save } from 'lucide-react';
 import API_URL from "../../config/config";
 

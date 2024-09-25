@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../context/useTheme';
 import { Search, Calendar, MapPin } from 'lucide-react';
 import API_URL from "../../config/config";
 

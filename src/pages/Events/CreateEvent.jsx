@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getUserInfo } from '../../utils/fetchUserInfo';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../context/useTheme';
 import { Calendar, Users, Type } from 'lucide-react';
 import API_URL from "../../config/config";
 

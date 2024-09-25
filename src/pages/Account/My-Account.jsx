@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../context/useTheme';
 import { User, Mail, Lock } from 'lucide-react';
 
 const MyAccount = ({ name, email, password }) => {

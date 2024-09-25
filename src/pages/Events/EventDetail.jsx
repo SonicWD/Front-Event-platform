@@ -5,7 +5,7 @@ import axios from "axios";
 import { getUserInfo } from "../../utils/fetchUserInfo";
 import API_URL from "../../config/config";
 import { Link } from "react-router-dom";
-import { useTheme } from "../../context/ThemeContext";
+import { useTheme } from '../../context/useTheme';
 import { X, Calendar, MapPin, Users, Edit } from "lucide-react";
 // eslint-disable-next-line no-unused-vars
 import { nav } from "framer-motion/client";

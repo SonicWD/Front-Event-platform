@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import MyAccount from './My-Account';
 import EditAccount from './EditAccount';
 import { getUserInfo } from '../../utils/fetchUserInfo';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../context/useTheme';
 import { LogOut, Edit, X } from 'lucide-react';
 
 const AccountPage = () => {

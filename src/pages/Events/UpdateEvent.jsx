@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getUserInfo } from '../../utils/fetchUserInfo';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '../../context/useTheme';
 import { Calendar, Users, Type, Save } from 'lucide-react';
 
 const UpdateEvent = () => {
