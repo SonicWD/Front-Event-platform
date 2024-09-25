@@ -43,15 +43,15 @@ const EventList = ({ onSelectEvent }) => {
     }, [filter, events]);
 
     if (loading) {
-        return <p className="text-center mt-4 dark:text-white">Loading events...</p>;
+        return <p className="text-center mt-20 dark:text-white">Loading events...</p>;
     }
 
     if (error) {
-        return <p className="text-center text-red-500 mt-4">{error}</p>;
+        return <p className="text-center text-red-500 mt-20">{error}</p>;
     }
 
     return (
-        <div className={`p-4 ${darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
+        <div className={`min-h-screen pt-20 px-4 sm:px-6 lg:px-8 ${darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
             <h2 className="text-2xl font-bold mb-4">Events</h2>
             <div className="relative mb-4">
                 <input
@@ -66,10 +66,10 @@ const EventList = ({ onSelectEvent }) => {
             {filteredEvents.length === 0 ? (
                 <p className="text-center">No events available</p>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {filteredEvents.map((event) => (
                         <div key={event.id} className={`rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105 ${darkMode ? 'bg-gray-800' : 'bg-white'}`} onClick={() => onSelectEvent(event)}>
-                            <img src={event.image} alt={event.title} className="w-full h-48 object-cover" />
+                            <img src={event.image || '/placeholder.svg'} alt={event.title} className="w-full h-48 object-cover" />
                             <div className="p-4">
                                 <h3 className="text-lg font-semibold mb-2">{event.title}</h3>
                                 <p className={`mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{event.description}</p>

@@ -43,7 +43,7 @@ const Login = () => {
       if (token) {
         localStorage.setItem("token", token);
         setAuthState({ token, isAuthenticated: true });
-        navigate("/eventsP/*");
+        navigate("/eventsP");
         console.log("Login successful");
       } else {
         console.error("No token received");
