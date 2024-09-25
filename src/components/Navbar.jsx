@@ -1,14 +1,15 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserInfo } from '../utils/fetchUserInfo';
 import { motion } from 'framer-motion';
-import '../index.css';
+import { Menu, X, Sun, Moon, LogOut, LogIn } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+import { getUserInfo } from '../utils/fetchUserInfo';
 
 const Navbar = () => {
   const [username, setUsername] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);  // Estado para manejar el modo oscuro
+  const { darkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,32 +27,14 @@ const Navbar = () => {
         }
       }
     };
-
-    // Verifica si el usuario ya tiene una preferencia para el modo oscuro
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      setDarkMode(true);
-      document.documentElement.classList.add('dark');
-    }
     
     fetchUserInfo();
   }, []);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    if (darkMode) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    }
-  };
-
   const logout = () => {
     setUsername('');
     localStorage.removeItem('token');
-    navigate('/');
+    navigate('/login');
   };
 
   const navigateTo = (path) => {
@@ -65,97 +48,70 @@ const Navbar = () => {
 
   return (
     <motion.header
-      className="fixed top-0 w-full bg-white dark:bg-black text-black dark:text-white shadow-md z-50"
-      initial={{ y: -100 }}
+      className={`fixed top-0 w-full ${darkMode ? 'bg-black text-white' : 'bg-white text-black'} shadow-md z-50 h-10`}
+      initial={{ y: -20 }}
       animate={{ y: 0 }}
       transition={{ type: 'spring', stiffness: 70, damping: 15 }}
     >
-      <div className="flex justify-between items-center p-4">
-        {/* Logo */}
+      <div className="flex justify-between items-center px-4 h-full">
         <img
-          src="/images/logos/logo.svg"
+          src="/icons/icon.svg"
           alt="logo"
-          className="h-10 cursor-pointer"
+          className="h-3 cursor-pointer"
           onClick={() => navigateTo('/eventsP')}
         />
 
-        {/* Botón de cambio de modo */}
-        <button
-          onClick={toggleDarkMode}
-          className="ml-4 focus:outline-none"
-        >
-          {darkMode ? '🌙 Modo Noche' : '☀️ Modo Día'}
-        </button>
+        <nav className="hidden md:flex space-x-4 text-sm">
+          <a onClick={() => navigateTo('/create-event')} className={`hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300 cursor-pointer ${darkMode ? 'text-white' : 'text-black'}`}>Create Event</a>
+          <a onClick={() => navigateTo('/eventsP')} className={`hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300 cursor-pointer ${darkMode ? 'text-white' : 'text-black'}`}>View Events</a>
+          <a onClick={() => navigateTo('/account')} className={`hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300 cursor-pointer ${darkMode ? 'text-white' : 'text-black'}`}>Account</a>
+        </nav>
 
-        {/* Botón de menú para móviles */}
-        <button
-          onClick={toggleMenu}
-          className="text-black dark:text-white md:hidden focus:outline-none"
-        >
-          {menuOpen ? '✖' : '☰'}
-        </button>
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={toggleDarkMode}
+            className="focus:outline-none"
+            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {darkMode ? <Sun size={12} /> : <Moon size={12} />}
+          </button>
+
+          <span className={`text-xs hidden md:inline ${darkMode ? 'text-white' : 'text-black'}`}>{username}</span>
+          {username ? (
+            <button onClick={logout} className="focus:outline-none" aria-label="Log out">
+              <LogOut size={12} />
+            </button>
+          ) : (
+            <button onClick={() => navigateTo('/login')} className="focus:outline-none" aria-label="Log in">
+              <LogIn size={12} />
+            </button>
+          )}
+
+          <button
+            onClick={toggleMenu}
+            className="md:hidden focus:outline-none"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+          >
+            {menuOpen ? <X size={12} /> : <Menu size={12} />}
+          </button>
+        </div>
       </div>
 
-      {/* Menú para dispositivos móviles y pantallas grandes */}
-      <motion.nav
-        className={`${
-          menuOpen ? 'block' : 'hidden'
-        } md:flex md:items-center md:justify-between`}
-        initial={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-        animate={menuOpen ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <ul className="flex flex-col md:flex-row md:space-x-6 items-center p-4">
-          <li>
-            <a
-              onClick={() => navigateTo('/create-event')}
-              className="block py-2 md:py-0 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300"
-            >
-              Crear Evento
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => navigateTo('/eventsP')}
-              className="block py-2 md:py-0 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300"
-            >
-              Ver Eventos
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => navigateTo('/account')}
-              className="block py-2 md:py-0 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300"
-            >
-              Cuenta
-            </a>
-          </li>
-        </ul>
-      </motion.nav>
-
-      {/* Sección de usuario */}
-      <div className="hidden md:flex items-center justify-end p-4">
-        <ul className="flex space-x-6">
-          <li>
-            <span className="mr-2">{username}</span>
-            {username ? (
-              <a
-                onClick={logout}
-                className="hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer transition-colors duration-300"
-              >
-                Cerrar sesión
-              </a>
-            ) : (
-              <a
-                onClick={() => navigateTo('/login')}
-                className="hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer transition-colors duration-300"
-              >
-                Iniciar Sesión
-              </a>
-            )}
-          </li>
-        </ul>
-      </div>
+      {menuOpen && (
+        <motion.div
+          className={`md:hidden absolute top-5 left-0 right-0 shadow-md ${darkMode ? 'bg-black' : 'bg-white'}`}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+        >
+          <nav className="flex flex-col p-4 space-y-2 text-sm">
+            <a onClick={() => navigateTo('/create-event')} className={`hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300 cursor-pointer ${darkMode ? 'text-white' : 'text-black'}`}>Create Event</a>
+            <a onClick={() => navigateTo('/eventsP')} className={`hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300 cursor-pointer ${darkMode ? 'text-white' : 'text-black'}`}>View Events</a>
+            <a onClick={() => navigateTo('/account')} className={`hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-300 cursor-pointer ${darkMode ? 'text-white' : 'text-black'}`}>Account</a>
+          </nav>
+        </motion.div>
+      )}
     </motion.header>
   );
 };
